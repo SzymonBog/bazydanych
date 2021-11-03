@@ -1,9 +1,4 @@
-CREATE TABLE pracownik(id_pracownika INT PRIMARY KEY,
-    -> imie VARCHAR(40) NOT NULL,
-    -> nazwisko VARCHAR(50) NOT NULL,
-    -> zarobki DOUBLE(10,2) DEFAULT 4000,
-    -> data_urodzenia DATE NOT NULL,
-    -> stanowisko ENUM('manager','kierownik','sprzedawca','kasjer'));
+CREATE TABLE pracownik(id_pracownika INT PRIMARY KEY, imie VARCHAR(40) NOT NULL, nazwisko VARCHAR(50) NOT NULL, zarobki DOUBLE(10,2) DEFAULT 4000, data_urodzenia DATE NOT NULL, stanowisko ENUM('manager','kierownik','sprzedawca','kasjer'));
 
 INSERT INTO pracownik VALUES(1, 'Jan','Kowalski',3000, '1999-01-01', 'kasjer');
 
@@ -15,4 +10,14 @@ SELECT nazwa FROM postac;
 
 CREATE TABLE postac1(id_postaci INT PRIMARY KEY, nazwa VARCHAR(40) NOT NULL, rodzaj ENUM('wiking','ptak','kobieta'), data_ur DATE NOT NULL, wiek INT UNSIGNED);
 
-CREATE TABLE walizka(id_walizki INT PRIMARY KEY AUTO_INCREMENT, pojemnosc INT UNSIGNED, kolor ENUM('rozowy','czerwony','teczowy','zolty'), id_wlasciciela INT, FOREIGN KEY (id_wlasciciela) REFERENCES postac(id_postaci));
+CREATE TABLE walizka(id_walizki INT PRIMARY KEY AUTO_INCREMENT, pojemnosc ININSERT INTO izba VALUES('1','spizarnia','1','1','czarny');
+ 
+CREATE TABLE izba(adres_budynku VARCHAR(40) PRIMARY KEY, nazwa_izby VARCHAR(40), metraz INT UNSIGNED, wlasciciel INT, FOREIGN KEY(wlasciciel) REFERENCES
+postac(id_postaci));
+
+INSERT INTO izba VALUES('1','spizarnia','1','1','czarny');
+
+CREATE TABLE przetwory(id_przetworu INT PRIMARY KEY, rok_produkcji INT, id_wykonawcy INT, FOREIGN KEY(id_wykonawcy) REFERENCES postac(id_postaci), zawartosc VARCHAR(40), dodatek VARCHAR(40), id_konsumenta INT, FOREIGN KEY(id_konsumenta) REFERENCES postac(id_postaci));
+
+INSERT INTO przetwory VALUES(1, 1654, '1', '', 'bigos_z_papryczka_chil', '1');
+
