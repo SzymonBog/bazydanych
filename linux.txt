@@ -37,3 +37,7 @@ UPDATE postac
 INSERT INTO postac VALUES(8, 'WikingJeden','wiking','400-01-01',38, '', '');
 
 DROP TABLE izba;
+
+ALTER TABLE postac ADD statek VARCHAR(40);
+
+ALTER TABLE postac ADD CONSTRAINT statek FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
