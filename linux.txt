@@ -33,3 +33,7 @@ UPDATE postac
     -> SET
     -> funkcja = 'kapitan'
     -> WHERE id_postaci = 2;
+
+INSERT INTO postac VALUES(8, 'WikingJeden','wiking','400-01-01',38, '', '');
+
+DROP TABLE izba;
