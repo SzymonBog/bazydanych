@@ -21,3 +21,15 @@ CREATE TABLE przetwory(id_przetworu INT PRIMARY KEY, rok_produkcji INT, id_wykon
 
 INSERT INTO przetwory VALUES(1, 1654, '1', '', 'bigos_z_papryczka_chil', '1');
 
+CREATE TABLE statek(nazwa_statku VARCHAR(40) PRIMARY KEY, rodzaj_statku ENUM('pasazerski','towarowy'), data_wodowania DATE, max_ladownosc INT UNSIGNED);
+
+SHOW CREATE TABLE walizka;
+
+ALTER TABLE walizka DROP FOREIGN KEY ifbk_1_walizka;
+
+ALTER TABLE postac ADD funkcja VARCHAR(40);
+
+UPDATE postac
+    -> SET
+    -> funkcja = 'kapitan'
+    -> WHERE id_postaci = 2;
