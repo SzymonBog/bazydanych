@@ -40,4 +40,24 @@ DROP TABLE izba;
 
 ALTER TABLE postac ADD statek VARCHAR(40);
 
+SELECT * FROM postac;
+
+ALTER TABLE postac  ADD CONSTRAINT pesel UNIQUE (pesel);
+
+UPDATE statek SET max_ladownosc = max_ladownosc - (max_ladownosc * 0.3);
+
 ALTER TABLE postac ADD CONSTRAINT statek FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
+
+UPDATE postac SET statek='titanic' WHERE ID_POSTACI=7;
+
+ALTER TABLE postac ADD pesel VARCHAR(11) PRIMARY KEY;
+
+ALTER TABLE postac MODIFY COLUMN rodzaj enum( 'wiking', 'ptak', 'kobieta', 'syrena' );';
+
+DELETE FROM postac WHERE nazwa = 'WikingTrzy';
+
+DELETE FROM postac WHERE nazwa = 'WikingPiec';
+
+INSERT INTO postac VALUES(5, 'Gertruda Nieszczera', 'syrena', '200-02-02', 20, '', 'diadema', '03165972355');
+
+UPDATE postac SET statek = 'diadema' WHERE id_postaci = 1;
