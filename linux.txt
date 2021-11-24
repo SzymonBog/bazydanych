@@ -4,11 +4,13 @@ INSERT INTO pracownik VALUES(1, 'Jan','Kowalski',3000, '1999-01-01', 'kasjer');
 
 CREATE TABLE projekt(id_projektu INT PRIMARY KEY, nazwa VARCHAR(40), id_pracownika INT, FOREIGN KEY (id_pracownika) REFERENCES pracownik(id_pracownika));
 
+UPDATE postac(1, , , ,)
+
 DESC postac;
 SELECT wiek FROM postac;
 SELECT nazwa FROM postac;
 
-CREATE TABLE postac1(id_postaci INT PRIMARY KEY, nazwa VARCHAR(40) NOT NULL, rodzaj ENUM('wiking','ptak','kobieta'), data_ur DATE NOT NULL, wiek INT UNSIGNED);
+CREATE TABLE postac(id_postaci INT PRIMARY KEY, nazwa VARCHAR(40) NOT NULL, rodzaj ENUM('wiking','ptak','kobieta'), data_ur DATE NOT NULL, wiek INT UNSIGNED);
 
 CREATE TABLE walizka(id_walizki INT PRIMARY KEY AUTO_INCREMENT, pojemnosc ININSERT INTO izba VALUES('1','spizarnia','1','1','czarny');
  
@@ -34,30 +36,46 @@ UPDATE postac
     -> funkcja = 'kapitan'
     -> WHERE id_postaci = 2;
 
-INSERT INTO postac VALUES(8, 'WikingJeden','wiking','400-01-01',38, '', '');
+ INSERT INTO postac VALUES(8, 'WikingJeden','wiking','400-01-01',38, '', '');
 
 DROP TABLE izba;
 
 ALTER TABLE postac ADD statek VARCHAR(40);
 
-SELECT * FROM postac;
-
-ALTER TABLE postac  ADD CONSTRAINT pesel UNIQUE (pesel);
-
-UPDATE statek SET max_ladownosc = max_ladownosc - (max_ladownosc * 0.3);
-
 ALTER TABLE postac ADD CONSTRAINT statek FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
 
-UPDATE postac SET statek='titanic' WHERE ID_POSTACI=7;
+CREATE TABLE Marynarz(id_postaci INT PRIMARY KEY, nazwa VARCHAR(40) NOT NULL, rodzaj ENUM('wiking','ptak','kobieta','syrena','waz'), data_urodzenia DATE, wiek INT, funkcja VARCHAR(40), statek VARCHAR(40), FOREIGN KEY(statek) REFERENCES statek(nazwa_statku), pesel VARCHAR(11));
 
-ALTER TABLE postac ADD pesel VARCHAR(11) PRIMARY KEY;
+CREATE TABLE marynarz AS SELECT * FROM postac WHERE rodzaj='wiking' OR nazwa='Drozd';
 
-ALTER TABLE postac MODIFY COLUMN rodzaj enum( 'wiking', 'ptak', 'kobieta', 'syrena' );';
+CREATE TABLE marynarz LIKE postac;
 
-DELETE FROM postac WHERE nazwa = 'WikingTrzy';
+ALTER TABLE marynarz ADD PRIMARY KEY(id_postaci);
 
-DELETE FROM postac WHERE nazwa = 'WikingPiec';
+ALTER TABLE marynarz ADD FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
 
-INSERT INTO postac VALUES(5, 'Gertruda Nieszczera', 'syrena', '200-02-02', 20, '', 'diadema', '03165972355');
+UPDATE postac SET statek = NULL WHERE id_postaci > 0;
 
-UPDATE postac SET statek = 'diadema' WHERE id_postaci = 1;
+DELETE FROM postac WHERE id_postaci = 6;
+
+DELETE FROM statek WHERE nazwa_statku = 'titanic';
+
+CREATE TABLE kreatura(idKreatury INT PRIMARY KEY NOT NULL, nazwa VARCHAR(30) DEFAULT NULL, rodzaj VARCHAR(30) DEFAULT NULL, dataUr DATE DEFAULT NULL, waga INT UNSIGNED DEFAULT NULL, udzwig INT UNSIGNED DEFAULT NULL);
+
+INSERT INTO bogdanskis.kreatura (idKreatury, nazwa, rodzaj, dataUr, waga, udzwig) SELECT idKreatury,nazwa,rodzaj,dataUr,waga,udzwig FROM wikingowie.kreatura;
+
+CREATE TABLE zwierz(id INT PRIMARY KEY AUTO_INCREMENT, nazwa VARCHAR(40), wiek INT);
+
+DELETE FROM statek WHERE nazwa_statku = 'diadema';
+
+INSERT INTO zwierz VALUES(1, Drozd, 1);
+
+INSERT INTO zwierz VALUES(2, 'Loco', 1);
+
+ALTER TABLE postac DROP FOREIGN KEY statek;
+
+CREATE TABLE kreatura(idKreatury INT PRIMARY KEY, nazwa VARCHAR(100), rodzaj ENUM('wiking','ryba','waz','ptak','malpa','wiedzma'), dataUr DATE, waga INT, udzwig INT);
+
+INSERT INTO bogdanskis.kreatura (idKreatury, nazwa, rodzaj, dataUr, waga, udzwig) SELECT idKreatury,nazwa,rodzaj,dataUr,waga,udzwig FROM wikingowie.kreatura;
+
+
