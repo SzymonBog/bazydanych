@@ -78,4 +78,30 @@ CREATE TABLE kreatura(idKreatury INT PRIMARY KEY, nazwa VARCHAR(100), rodzaj ENU
 
 INSERT INTO bogdanskis.kreatura (idKreatury, nazwa, rodzaj, dataUr, waga, udzwig) SELECT idKreatury,nazwa,rodzaj,dataUr,waga,udzwig FROM wikingowie.kreatura;
 
+CREATE TABLE zasob(id_Zasobu INT NOT NULL PRIMARY KEY AUTO_INCREMENT, nazwa VARCHAR(50) DEFAULT NULL, waga FLOAT(6,2)DEFAULT NULL, ilosc INT UNSIGNED DEFAULT NULL, dataPozyskania DATE DEFAULT NULL, rodzaj VARCHAR(50) DEFAULT NULL);
 
+INSERT INTO bogdanskis.zasob (id_Zasobu, nazwa, waga, ilosc, dataPozyskania, rodzaj) SELECT idZasobu,nazwa,waga,ilosc,dataPozyskania,rodzaj FROM wikingowie.zasob;
+
+CREATE TABLE ekwipunek(idEkwipunku INT NOT NULL AUTO_INCREMENT PRIMARY KEY, idKreatury INT DEFAULT NULL, FOREIGN KEY (idKreatury) REFERENCES kreatura(idKreatury), idZasobu INT DEFAULT NULL, FOREIGN KEY (idZasobu) REFERENCES zasob(id_Zasobu), ilosc INT UNSIGNED DEFAULT NULL);
+
+INSERT INTO bogdanskis.ekwipunek (idEkwipunku, idKreatury, idZasobu, ilosc) SELECT idEkwipunku,idKreatury,idZasobu,ilosc FROM wikingowie.ekwipunek;
+
+SELECT * FROM zasob;
+
+SELECT * FROM zasob WHERE rodzaj = 'jedzenie';
+
+SELECT * FROM kreatura WHERE rodzaj !='wiedzma' HAVING udzwig>50;
+
+SELECT * FROM zasob WHERE waga>2 AND waga<5;
+
+SELECT * FROM zasob WHERE month(dataPozyskania)=7 OR month(dataPozyskania)=8;
+
+SELECT CONCAT(nazwa,' ',rodzaj) FROM kreatura WHERE rodzaj LIKE 'wi%';
+
+SELECT CONCAT(ilosc*waga) FROM zasob WHERE year(dataPozyskania)>=2000 AND year(dataPozyskania)<=2007;
+
+SELECT nazwa,rodzaj FROM zasob WHERE nazwa LIKE 'Ba%' OR nazwa LIKE '%os' ORDER BY nazwa ASC;
+
+SELECT AVG(waga) FROM kreatura WHERE rodzaj = 'wiking';
+
+SELECT AVG(waga), COUNT(nazwa) FROM kreatura;
