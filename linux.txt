@@ -108,3 +108,25 @@ SELECT AVG(waga), COUNT(nazwa) FROM kreatura;
 
 SELECT kreatura.nazwa, zasob.nazwa FROM kreatura JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu = zasob.id_Zasobu WHERE year(dataUR)>1669 AND year(dataUr)<1680 AND kreatura.rodzaj = 'wiking';
 
+SELECT kreatura.nazwa FROM kreatura JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu = zasob.id_Zasobu WHERE zasob.rodzaj = 'jedzenie' ORDER BY 'kreatura.wiek' ASC LIMIT 5;
+
+SELECT a.nazwa, b.nazwa from kreatura a, kreatura b WHERE a.idKreatury + 5 = b.idKreatury;
+
+SELECT kreatura.rodzaj, zasob.waga AVG FROM kreatura JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu = zasob.id_Zasobu WHERE kreatura.rodzaj != 'malpa' AND kreatura.rodzaj != 'waz' AND ekwipunek.ilosc < 30;
+
+
+CREATE TABLE uczestnicy (like wikingowie.uczestnicy);
+
+INSERT INTO bogdanskis.ekwipunek (id_wyprawy, id_uczestnika) SELECT id_wyprawy, id_uczestnika FROM wikingowie.uczestnicy;
+
+CREATE TABLE wyprawa (like wikingowie.wyprawa);
+
+INSERT INTO bogdanskis.uczestnicy (id_wyprawy, id_uczestnika) SELECT id_wyprawy, id_uczestnika FROM wikingowie.uczestnicy;
+
+CREATE TABLE sektor (like wikingowie.sektor);
+
+CREATE TABLE etapy_wyprawy (like wikingowie.etapy_wyprawy);
+
+INSERT INTO bogdanskis.sektor (id_sektora, nazwa, wspolrzedna_x, wspolrzedna_y) SELECT id_sektora, nazwa, wspolrzedna_x, wspolrzedna_y FROM wikingowie.sektor;
+
+INSERT INTO bogdanskis.etapy_wyprawy (idEtapu, idWyprawy, sektor, kolejnosc, dziennik) SELECT idEtapu, idWyprawy, sektor, kolejnosc, dziennik FROM wikingowie.etapy_wyprawy;
