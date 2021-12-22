@@ -105,3 +105,6 @@ SELECT nazwa,rodzaj FROM zasob WHERE nazwa LIKE 'Ba%' OR nazwa LIKE '%os' ORDER 
 SELECT AVG(waga) FROM kreatura WHERE rodzaj = 'wiking';
 
 SELECT AVG(waga), COUNT(nazwa) FROM kreatura;
+
+SELECT kreatura.nazwa, zasob.nazwa FROM kreatura JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu = zasob.id_Zasobu WHERE year(dataUR)>1669 AND year(dataUr)<1680 AND kreatura.rodzaj = 'wiking';
+
