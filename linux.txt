@@ -130,3 +130,5 @@ CREATE TABLE etapy_wyprawy (like wikingowie.etapy_wyprawy);
 INSERT INTO bogdanskis.sektor (id_sektora, nazwa, wspolrzedna_x, wspolrzedna_y) SELECT id_sektora, nazwa, wspolrzedna_x, wspolrzedna_y FROM wikingowie.sektor;
 
 INSERT INTO bogdanskis.etapy_wyprawy (idEtapu, idWyprawy, sektor, kolejnosc, dziennik) SELECT idEtapu, idWyprawy, sektor, kolejnosc, dziennik FROM wikingowie.etapy_wyprawy;
+
+SELECT nazwa, (SELECT SUM(ilosc) FROM ekwipunek WHERE ekwipunek.idKreatury=wyprawa.kierownik) FROM wyprawa;
