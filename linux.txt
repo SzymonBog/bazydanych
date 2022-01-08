@@ -131,4 +131,5 @@ INSERT INTO bogdanskis.sektor (id_sektora, nazwa, wspolrzedna_x, wspolrzedna_y) 
 
 INSERT INTO bogdanskis.etapy_wyprawy (idEtapu, idWyprawy, sektor, kolejnosc, dziennik) SELECT idEtapu, idWyprawy, sektor, kolejnosc, dziennik FROM wikingowie.etapy_wyprawy;
 
-SELECT nazwa, (SELECT SUM(ilosc) FROM ekwipunek WHERE ekwipunek.idKreatury=wyprawa.kierownik) FROM wyprawa;
+SELECT nazwa, (SELECT SUM(ilosc) FROM ekwipunek WHERE ekwipunek.idKreatury=wyprawa.kierownik) AS ekwipunek_suma FROM wyprawa;
+
